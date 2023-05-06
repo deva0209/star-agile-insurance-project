@@ -20,7 +20,7 @@ pipeline {
     }
   stage('Publish Reports') {
         steps {
-	publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/insureme/target', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+	publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/insureme/target', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: , useWrapperFileDirectly: true])
 	}
   }
   }
