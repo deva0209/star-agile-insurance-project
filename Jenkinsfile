@@ -16,7 +16,7 @@ pipeline {
        steps {
 	       echo "Cleaning... Compiling...Testing... Packaging..."
         	sh 'mvn clean package'
-            }
+       }
           }
   }
 }
