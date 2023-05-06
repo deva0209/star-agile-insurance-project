@@ -28,5 +28,10 @@ pipeline {
 	sh 'sudo docker build -t deva0209/insure-me:latest .'
 	}
     }
-  }
+	stage('Docker Login') {
+        steps {withCredentials([usernamePassword(credentialsId: 'docker-login', passwordVariable: 'dockerhubpsswd', usernameVariable: 'dockerhubuser')]) {
+     sh "docker login -u ${env.dockerhubuser} -p ${env.dockerhubpsswd}"
+	}
+	      }
+	}
 }
