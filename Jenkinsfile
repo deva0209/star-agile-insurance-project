@@ -18,10 +18,15 @@ pipeline {
         	sh 'mvn clean package'
        }
     }
-  stage('Publish Reports') {
+    stage('Publish Reports') {
         steps {
 	publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/insureme/target', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: 'true'])
 	}
   }
+    stage('Docker Image Creation') {
+        steps {
+	sh 'docker build -t /insure-me:latest .'
+	}
+    }
   }
 }
