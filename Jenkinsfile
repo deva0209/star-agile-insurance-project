@@ -25,7 +25,7 @@ pipeline {
   }
     stage('Docker Image Creation') {
         steps {
-	sh 'docker build -t /insure-me:latest .'
+	sh 'docker build -t deva0209/insure-me:latest .'
 	}
     }
   }
