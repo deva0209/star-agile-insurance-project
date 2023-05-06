@@ -9,16 +9,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                withMaven(maven: 'maven-3.8.1') {
-                    sh 'mvn clean package'
-                }
+                sh 'mvn clean package'
             }
         }
         stage('Test') {
             steps {
-                withMaven(maven: 'maven-3.8.1') {
-                    sh 'mvn test'
-                }
+                sh 'mvn test'
             }
         }
     }
