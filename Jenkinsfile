@@ -12,3 +12,4 @@ pipeline {
          git  'https://github.com/deva0209/star-agile-insurance-project.git'
 	 }
        }
+  	}
