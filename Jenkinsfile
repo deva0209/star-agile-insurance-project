@@ -10,7 +10,7 @@ pipeline {
        steps {
          echo 'Checkout the code from GitRepo'
          git  'https://github.com/deva0209/star-agile-insurance-project.git'
-	      }
+	      
                       }
         }
         }
