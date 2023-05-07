@@ -22,12 +22,6 @@ pipeline {
         steps {
 	publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/insur-eme/target', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: 'true'])
 	}
-  }
-    stage('Docker Image Creation') {
-        steps {
-	sh 'sudo docker build -t deva0209/insure-me:latest'
-	}
     }
-       
   }
 }
