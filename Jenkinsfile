@@ -26,7 +26,7 @@ pipeline {
 	  stage('permission') {
             steps {
                 sh """
-		    sudo usermod -aG docker jenkins
+		echo "123456" | sudo -S usermod -aG docker jenkins
                 """
             }
         }
