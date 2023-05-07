@@ -31,7 +31,7 @@ pipeline {
 stage('Docker Login') {
   steps {
     withCredentials([usernamePassword(credentialsId: 'docker-login', passwordVariable: 'Deva0209@', usernameVariable: 'deva0209')]) {
-      withEnv(['DOCKER_REGISTRY=registry.hub.docker.com']) {
+      withEnv(['DOCKER_REGISTRY=registry.hub.docker.com', 'DOCKER_CLI_EXPERIMENTAL=enabled']) {
         sh '''
           echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY
         '''
