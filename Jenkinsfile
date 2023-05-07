@@ -33,7 +33,7 @@ stage('Docker Login') {
     withCredentials([usernamePassword(credentialsId: 'docker-login', passwordVariable: 'Deva0209@', usernameVariable: 'deva0209')]) {
       withEnv(['DOCKER_REGISTRY=registry.hub.docker.com']) {
         sh '''
-          echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY
+          echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY
         '''
       }
     }
