@@ -33,7 +33,7 @@ pipeline {
                             [$class: 'PasswordParameterDefinition', description: 'Enter DockerHub password', name: 'DOCKERHUB_PASSWORD']
                         ]
                     )
-                    sh 'echo $userInput.DOCKERHUB_PASSWORD | docker login -u $userInput.DOCKERHUB_USERNAME --password-stdin'
+			sh 'echo ${userInput.DOCKERHUB_PASSWORD} | docker login -u ${userInput.DOCKERHUB_USERNAME} --password-stdin'
                 }
             }
         }
