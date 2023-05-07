@@ -28,14 +28,16 @@ pipeline {
 	sh 'sudo docker build -t deva0209/insure-me:latest .'
 	}
     }
-stage('Docker Login') {
-  steps {
-    withCredentials([usernamePassword(credentialsId: 'docker login credential id', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USER')]) 
-	  	{
-                        sh "docker login -u ${env.DOCKERHUB_USER} --password-stdin ${env.DOCKERHUB_PASSWORD}"
-                        sh 'docker push <docker hub username>/<image>'
-		}
-  	}
-			}
+        stage('Docker Login') {
+            steps {
+                input message: 'Please enter your DockerHub credentials', parameters: [
+                    string(name: 'DOCKERHUB_USERNAME', defaultValue: '', description: 'DockerHub username'),
+                    password(name: 'DOCKERHUB_PASSWORD', defaultValue: '', description: 'DockerHub password')
+                ]
+                sh """
+                    echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin < /dev/tty
+                """
+	    }
+	}
   }
 }
