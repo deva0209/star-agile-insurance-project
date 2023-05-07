@@ -25,9 +25,25 @@ pipeline {
     }
 	  stage('Docker Login') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-                    sh 'echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin'
+                script {
+                    def userInput = input(
+                        message: 'Enter DockerHub credentials',
+                        parameters: [
+                            [$class: 'StringParameterDefinition', defaultValue: '', description: 'Enter DockerHub username', name: 'DOCKERHUB_USERNAME'],
+                            [$class: 'PasswordParameterDefinition', defaultValue: '', description: 'Enter DockerHub password', name: 'DOCKERHUB_PASSWORD']
+                        ]
+                    )
+                    sh 'echo ${userInput.DOCKERHUB_PASSWORD} | docker login -u ${userInput.DOCKERHUB_USERNAME} --password-stdin'
                 }
+            }
+        }
+        stage('Build and Push Image') {
+            steps {
+                sh """
+                    docker build -t insure-me .
+                    docker tag insure-me deva0209/insure-me
+                    docker push deva0209/insure-me
+                """
             }
         }
   }
