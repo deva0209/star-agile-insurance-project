@@ -30,14 +30,16 @@ pipeline {
     }
         stage('Docker Login') {
             steps {
-                input message: 'Please enter your DockerHub credentials', parameters: [
-                    string(name: 'DOCKERHUB_USERNAME', defaultValue: '', description: 'DockerHub username'),
-                    password(name: 'DOCKERHUB_PASSWORD', defaultValue: '', description: 'DockerHub password')
-                ]
-                sh """
-                    echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin < /dev/tty
-                """
-	    }
-	}
+                script {
+                    def dockerhubCredentials = input(
+                        message: 'Enter DockerHub credentials',
+                        parameters: [
+                            [$class: 'UserPasswordMultiBinding', credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD', description: 'Enter DockerHub username and password']
+                        ]
+                    )
+                    sh "echo ${dockerhubCredentials.PASSWORD} | docker login -u ${dockerhubCredentials.USERNAME} --password-stdin"
+                }
+            }
+        }
   }
 }
