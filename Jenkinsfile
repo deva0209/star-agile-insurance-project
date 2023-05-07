@@ -34,7 +34,7 @@ stage('Docker Login') {
 	  	{
                         sh "docker login -u ${env.DOCKERHUB_USER} --password-stdin ${env.DOCKERHUB_PASSWORD}"
                         sh 'docker push <docker hub username>/<image>'
-                }
+		}
   	}
 			}
   }
