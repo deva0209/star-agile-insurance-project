@@ -1,8 +1,6 @@
 pipeline {
   agent any
-environment {
-	DOCKERHUB_PASSWORD = credentials('DOCKERHUB_PASSWORD')
-}
+	
   tools {
       maven 'M2_HOME'
     }
