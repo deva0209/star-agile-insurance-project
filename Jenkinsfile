@@ -23,10 +23,9 @@ pipeline {
 	publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/insure-me/target', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: 'true'])
 	}
     }
-	  stage('Docker Image') {
+	  stage('permission') {
             steps {
                 sh """
-                    docker build -t insure-me .
 		    sudo usermod -aG docker jenkins
                 """
             }
@@ -48,6 +47,7 @@ pipeline {
         stage('Tag and Push Image') {
             steps {
                 sh """
+		docker build -t insure-me .
                     docker tag insure-me deva0209/insure-me
                     docker push deva0209/insure-me
                 """
