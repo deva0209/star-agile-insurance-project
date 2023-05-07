@@ -28,18 +28,6 @@ pipeline {
 	sh 'sudo docker build -t deva0209/insure-me:latest .'
 	}
     }
-        stage('Docker Login') {
-            steps {
-                script {
-                    def dockerhubCredentials = input(
-                        message: 'Enter DockerHub credentials',
-                        parameters: [
-                            [$class: 'UserPasswordMultiBinding', credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD', description: 'Enter DockerHub username and password']
-                        ]
-                    )
-                    sh "echo ${dockerhubCredentials.PASSWORD} | docker login -u ${dockerhubCredentials.USERNAME} --password-stdin"
-                }
-            }
-        }
+       
   }
 }
