@@ -28,16 +28,18 @@ pipeline {
 	sh 'sudo docker build -t deva0209/insure-me:latest .'
 	}
     }
-	stage('Docker Login') {
-        steps {withCredentials([usernamePassword(credentialsId: 'dockerhubpsswd', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-  withEnv(['DOCKER_REGISTRY=registry.hub.docker.com']) {
-    sh '''
-      echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY
-      # Your other Docker commands go here
-    '''
-  		}
-	       }
-	      }
-             }
+stage('Docker Login') {
+  steps {
+    withCredentials([usernamePassword(credentialsId: 'dockerhubpsswd', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+      withEnv(['DOCKER_REGISTRY=registry.hub.docker.com']) {
+        sh '''
+          echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY
+        '''
+      }
+    }
+  }
+}
+  }
+}
   }
 }
