@@ -30,14 +30,12 @@ pipeline {
     }
 stage('Docker Login') {
   steps {
-    withCredentials([usernamePassword(credentialsId: 'dockerhubpsswd', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-      withEnv(['DOCKER_REGISTRY=registry.hub.docker.com', 'DOCKER_CLI_EXPERIMENTAL=enabled']) {
-        sh '''
-          echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY
-        '''
-      }
-    }
-  }
-}
+    withCredentials([usernamePassword(credentialsId: '<docker login credential id>', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USER')]) 
+	  	{
+                        sh "docker login -u ${env.DOCKERHUB_USER} --password-stdin ${env.DOCKERHUB_PASSWORD}"
+                        sh 'docker push <docker hub username>/<image>'
+                }
+  	}
+			}
   }
 }
