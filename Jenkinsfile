@@ -29,11 +29,11 @@ pipeline {
                     def userInput = input(
                         message: 'Enter DockerHub credentials',
                         parameters: [
-                            [$class: 'StringParameterDefinition', defaultValue: '', description: 'Enter DockerHub username', name: 'DOCKERHUB_USERNAME'],
-                            [$class: 'PasswordParameterDefinition', defaultValue: '', description: 'Enter DockerHub password', name: 'DOCKERHUB_PASSWORD']
+                            [$class: 'StringParameterDefinition', defaultValue: 'deva0209', description: 'Enter DockerHub username', name: 'DOCKERHUB_USERNAME'],
+                            [$class: 'PasswordParameterDefinition', description: 'Enter DockerHub password', name: 'DOCKERHUB_PASSWORD']
                         ]
                     )
-                    sh 'echo ${userInput.DOCKERHUB_PASSWORD} | docker login -u ${userInput.DOCKERHUB_USERNAME} --password-stdin'
+                    sh 'echo $userInput.DOCKERHUB_PASSWORD | docker login -u $userInput.DOCKERHUB_USERNAME --password-stdin'
                 }
             }
         }
