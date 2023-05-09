@@ -31,7 +31,6 @@ pipeline {
 	stage('push image to docker hub') {
              steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USER')]) {
-                        sh 'set -x' // enable debugging output
 			sh 'docker login -u ${env.DOCKERHUB_USER} --password-stdin ${env.DOCKERHUB_PASSWORD}'
                         sh 'docker push deva0209/insure-me:latest'
                 }
