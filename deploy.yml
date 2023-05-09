@@ -2,7 +2,7 @@
 - name: configure docker on other server
   hosts: [server]
   become: true
- tasks:
+  tasks:
 - name: apt update
   command: sudo apt update
 - name: install the python using pip
