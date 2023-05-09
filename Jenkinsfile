@@ -32,7 +32,7 @@ pipeline {
              steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USER')]) {
                         sh "docker login -u ${env.DOCKERHUB_USER} --password-stdin ${env.DOCKERHUB_PASSWORD}"
-                        sh 'docker push deva0209/insure-me'
+                        sh 'docker push deva0209/insure-me:latest'
                 }
              }
         }
