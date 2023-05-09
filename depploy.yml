@@ -1,0 +1,19 @@
+---
+- name: configure docker on other server
+  hosts: [server]
+  become: true
+  tasks:
+- name: apt update
+  command: sudo apt update
+- name: install the python using pip
+  command: sudo apt install -y python-pip
+- name: installing Docker
+  command: sudo apt-get install -y docker.io
+  become: yes
+  become_user: root
+- name: start docker service using systemctl
+  command: sudo systemctl start docker
+  become: yes
+  become_user: root
+- name: deploy image from dockerhub and run as container
+  command: docker run -itd -p 8080:8081 deva0209/insure-me:latest
