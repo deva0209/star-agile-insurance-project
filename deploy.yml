@@ -1,7 +1,7 @@
 ---
-- name: configure docker on other server
-  hosts: [server]
+- hosts: [server]
   become: true
+  connection: ssh
   tasks:
     - name: apt update
       command: sudo apt update
