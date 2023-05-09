@@ -36,10 +36,10 @@ pipeline {
                 }
              }
         }
-	/*stage('deploy using ansible') {
+	stage('deploy using ansible') {
 	    steps {
-		ansiblePlaybook become: true, credentialsId: 'execute-ansible', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-deploy.yml'
+		ansiblePlaybook credentialsId: 'ansibleID', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'deploy.yml'
 	    }
-	}*/
+	}
     }
 }
